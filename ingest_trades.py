@@ -8,7 +8,7 @@ import websockets as websocket
 from websockets.asyncio.client import connect
 
 
-def flush(rows: dict) -> None:
+def flush(rows) -> None:
     # Convert to polars dataframe and use its built-in parquet writer
     df = pl.DataFrame(rows)
     # Write the rows to a Parquet file

@@ -1,8 +1,9 @@
 import polars as pl
+from decimal import Decimal
 
 # Used to validate the transformation from bronze to silver quality
 # Can add more functionality here in the future
-def validate(df: pl.DataFrame) -> tuple[int, int]:
+def validate(df: pl.DataFrame) -> tuple[int | float | Decimal, int | float | Decimal]:
     # Validate the dataframe by checking for null values and duplicates
     # We "sum_horizontal" to get the total number of nulls and duplicates across all columns. With normal sum, we would get a df with a sum of nulls in each column
     # Item extracts the value from the series
