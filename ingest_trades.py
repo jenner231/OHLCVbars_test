@@ -2,6 +2,7 @@ import asyncio
 import json
 import polars as pl
 from time import time
+from datetime import datetime, timezone
 import parquet
 import websockets as websocket
 from websockets.asyncio.client import connect
@@ -35,7 +36,8 @@ async def main():
                 "price": raw["p"],
                 "quantity": raw["q"],
                 "trade_time": raw["T"],
-                "is_buyer_maker": raw["m"]
+                "is_buyer_maker": raw["m"],
+                "ingest_time": datetime.now(timezone.utc).isoformat()  # Add ingest time to determine tiebreakers in deduplication
             }
             buffer.append(tick)
             #Increment the counter and print every 10 ticks received
